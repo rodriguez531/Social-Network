@@ -10,9 +10,10 @@ const {
     // deleteFriend,
 } =require('../../controllers/user-controller.js');
 
-router.route('/')
+router
+.route('/')
 .get(getAllUsers)
-.post(addUser)
+.post(addUser);
 
 router.route('/:id')
 .get(getSingleUser)

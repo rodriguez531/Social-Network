@@ -1,10 +1,10 @@
 
-const {Users} = require('../models')
+const { User } = require('../models')
 
 const userController = {
     //Get all User
     getAllUsers(req, res){
-        Users.find({})
+        User.find({})
         .populate({
             path: 'thoughts',
             select: '-__v'
@@ -20,7 +20,7 @@ const userController = {
 
     //get singleUser
     getSingleUser({ params}, res){
-        Users.findOne({_id: params.id})
+        User.findOne({_id: params.id})
         .populate({
             path: 'thoughts',
             select: '-__v'
@@ -34,15 +34,15 @@ const userController = {
         });
     },
   //add user
-  addUser({body}, res){
-    Users.create(body)
-    .then(dbUserData => res.json(dbPizzaData))
+  addUser( {body }, res){
+    User.create(body)
+    .then(dbUserData => res.json(dbUserData))
     .cath(err => res.json(err));
   },
 
-
+    //update user by id
   updateUser({params, body}, res) {
-    Users.findOneAndUpdate({_id: params.id}, body,{
+    User.findOneAndUpdate({_id: params.id}, body,{
         new: true,
         runValidators: true
     })
@@ -53,9 +53,16 @@ const userController = {
         }
         res.json(dbUserData);
     })
-    .catch(err => res.json(error));
+    .catch(err => res.json(err));
+  },
+
+  //delete user
+  deleteUser({params}, res) {
+    User.findOneAndDelete({_id: params.id })
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => res.json(err));
   },
     
-}
+};
 
-module.exports =userController;
+module.exports = userController;

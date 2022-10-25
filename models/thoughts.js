@@ -1,7 +1,6 @@
 const { Schema, model, Types } = require('mongoose');
 
-
-const reactionSchema = new Schema(
+const thoughtSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
@@ -20,10 +19,9 @@ const reactionSchema = new Schema(
             default: Date.now,
             get: createdAtVal => dateFormat(createdAtVal)
         },
-    }
-)
+    },
 
-const thoughtSchema = new Schema(
+    
     {
         thoughtText: {
             type: String,
@@ -45,5 +43,5 @@ const thoughtSchema = new Schema(
         }],
     }
 )
-const Thoughts = model('Thoughts', thoughtSchema)
-module.exports = Thoughts;
+const Thought = model('Thought', thoughtSchema,)
+module.exports = Thought;
